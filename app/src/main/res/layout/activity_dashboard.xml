@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Dashboard">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/splash_text_name"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textSize="24sp"
+            android:fontFamily="@font/baloo"/>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:padding="5dp">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border"
+                    android:padding="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/new_customer_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        app:srcCompat="@drawable/client_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/new_customer_btn"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/muli_black"
+                        android:gravity="center_horizontal"
+                        android:text="@string/add_new_client"
+                        android:textAlignment="center"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border"
+                    android:layout_marginLeft="5dp"
+                    android:padding="5dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/view_customers_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        app:srcCompat="@drawable/customer_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/view_customers_btn"
+                        android:layout_centerInParent="true"
+                        android:text="@string/view_customer"
+                        android:fontFamily="@font/muli_black"
+                        android:textSize="16sp"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:gravity="center_horizontal" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:padding="5dp">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border"
+                    android:padding="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/add_work_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        app:srcCompat="@drawable/work_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/add_work_detail"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/muli_black"
+                        android:gravity="center_horizontal"
+                        android:text="@string/add_work_detail"
+                        android:textAlignment="center"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border"
+                    android:padding="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/view_work_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        app:srcCompat="@drawable/work_detail_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/view_work_detail"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/muli_black"
+                        android:gravity="center_horizontal"
+                        android:text="@string/view_work_detail"
+                        android:textAlignment="center"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:padding="5dp">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border"
+                    android:padding="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/add_new_user"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        app:srcCompat="@drawable/new_customer_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/add_new_user"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/muli_black"
+                        android:gravity="center_horizontal"
+                        android:text="@string/add_new_user"
+                        android:textAlignment="center"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border"
+                    android:layout_marginLeft="5dp"
+                    android:padding="5dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/view_users_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        app:srcCompat="@drawable/new_user_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/view_users_btn"
+                        android:layout_centerInParent="true"
+                        android:text="@string/view_user"
+                        android:fontFamily="@font/muli_black"
+                        android:textSize="16sp"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:gravity="center_horizontal" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:padding="5dp">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/black_border"
+                    android:layout_marginLeft="5dp"
+                    android:padding="5dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/seller_logout_icon"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        app:srcCompat="@drawable/logout_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/seller_logout_icon"
+                        android:layout_centerInParent="true"
+                        android:text="@string/logout"
+                        android:fontFamily="@font/muli_black"
+                        android:textSize="16sp"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:gravity="center_horizontal" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

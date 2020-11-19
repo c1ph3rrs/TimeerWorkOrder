@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">TimeerWorkOrder</string>
+    <string name="splash_text">TWO</string>
+    <string name="splash_text_name">Timeer Work Order</string>
+    <string name="retail_detail_text">Timer Work Order is app where you can add word detail of customers. Here you can Login or Register by clicking the below button</string>
+    <string name="login">login</string>
+    <string name="signup">Sign Up</string>
+    <string name="new_customer">New Customer</string>
+    <string name="add_new_customer">Add New Customer</string>
+    <string name="view_customer">View Customer</string>
+    <string name="login_here">Login Here</string>
+    <string name="sign_up_now">Sign Up Now</string>
+    <string name="enter_username">Username</string>
+    <string name="enter_password">Password</string>
+    <string name="enter_phone_no">Phone No</string>
+    <string name="next">Next</string>
+
+    <!--OTP code    -->
+
+    <string name="otp_code_text">CO\nDE</string>
+    <string name="otp_verification_text">Verification</string>
+    <string name="otp_description_text">Please wait while we sent OTP code on this number. </string>
+    <string name="verify">Verify</string>
+    <string name="make_selection">Please Choose</string>
+    <string name="make_selection_description">Please Choose any item in which we send a verification code to reset Password.</string>
+    <string name="via_sms">Via SMS</string>
+    <string name="via_email">Via Email</string>
+    <string name="dummy_number">Dummy Number</string>
+    <string name="via_email_desc">abcdef@gmail.com</string>
+    <string name="resend_code">Resend Code</string>
+    <string name="login_as_admin">I\'m Admin</string>
+    <string name="login_admin">Login Admin</string>
+    <string name="login_not_admin">Not an Admin</string>
+
+    <string name="new_customer_name">Customer Name</string>
+    <string name="new_customer_description">Description</string>
+    <string name="new_customer_hardware">Hardware Detail</string>
+    <string name="save_new_customer">Save Record</string>
+
+    <string name="customer_name">Customer Name</string>
+    <string name="customer_desc">Customer Desc</string>
+
+    <string name="remember_me">Remember Me</string>
+    <string name="date_text">Today Date</string>
+    <string name="job_detail">Job Details</string>
+    <string name="hardware_list">Hardware Lists</string>
+    <string name="working_hours">Working Hours</string>
+    <string name="work_travel">Travel</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="submit">Submit</string>
+    <string name="logout">Logout</string>
+    <string name="date">Date</string>
+    <string name="customers">Customers</string>
+    <string name="travel_history">Travel History</string>
+
+    <string name="new_clients">New Clients</string>
+    <string name="new_client_name">Client Name</string>
+    <string name="new_company_name">Company Name</string>
+    <string name="new_contact_name">Contact Name</string>
+    <string name="new_contact_address">Address</string>
+    <string name="new_contact_city">City</string>
+    <string name="new_contact_state">State</string>
+    <string name="new_contact_zip">Zip Code</string>
+    <string name="add_new_client">Add New Client</string>
+    <string name="add_work_detail">Add Work Detail</string>
+    <string name="add_new_user">Add New User</string>
+    <string name="view_user">View Users</string>
+
+    <string name="user_email">Email</string>
+    <string name="user_password">Password</string>
+    <string name="user_confirm_password">Re-Enter Password</string>
+    <string name="apply_changes">Apply Changes</string>
+
+    <string name="work_order_detail">Work Order Detail</string>
+    <string name="travel_time">Travel Time</string>
+
+    <string name="search_customer">Search Customer</string>
+    <string name="time_text">Time</string>
+    <string name="work_text">Work Text</string>
+    <string name="view_work_detail">Work Detail</string>
+    <string name="view_work_update_btn">Update Record</string>
+
+
+</resources>
