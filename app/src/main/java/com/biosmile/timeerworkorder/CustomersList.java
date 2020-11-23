@@ -63,6 +63,7 @@ public class CustomersList extends AppCompatActivity {
 
     Spinner customerNamesSpinner;
     DatabaseReference customerSpinnerRef;
+    String minutess = "00";
 
     ArrayList<String> customerList = new ArrayList<>();
     TextView todayDateTimePicker, workingHours;
@@ -76,6 +77,8 @@ public class CustomersList extends AppCompatActivity {
     String customerJobDetail, customerHardwareDetail, workDate, workTime, customerName, travel;
     ProgressDialog loadingDialog;
 
+    TimePickerDialog timerPicker;
+
     DatabaseReference rootRef;
 
     @Override
@@ -87,7 +90,7 @@ public class CustomersList extends AppCompatActivity {
         rootRef = FirebaseDatabase.getInstance().getReference();
 
         todayDateTimePicker = findViewById(R.id.today_date_text);
-        workHourTxt = findViewById(R.id.work_hour_txt);
+        workingHours = findViewById(R.id.work_hour_txt);
         submitButton = findViewById(R.id.customer_detail_submit_btn);
         backIcon = findViewById(R.id.back_icon);
         
@@ -96,6 +99,7 @@ public class CustomersList extends AppCompatActivity {
         travelRadioBox = findViewById(R.id.radio_group);
 
         customerHardwareDetailTxt.getEditText().setText("None");
+        workingHours.setText("00:00");
 //        workingHours.getEd.setText("00:00");
 
         Calendar calendar = Calendar.getInstance();
@@ -120,6 +124,16 @@ public class CustomersList extends AppCompatActivity {
                 showDateTimeDialog(todayDateTimePicker);
             }
         });
+        
+        workingHours.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                addWorkingHours();
+                
+                workTimer();
+            }
+            
+        });
 
         backIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,6 +153,59 @@ public class CustomersList extends AppCompatActivity {
 
         customerNamesSpinner = findViewById(R.id.choose_customer_spinner);
         showSpinnerData();
+
+    }
+
+    private void workTimer() {
+
+        final Calendar cldr = Calendar.getInstance();
+        int hour = cldr.get(Calendar.HOUR_OF_DAY);
+        int minutes = cldr.get(Calendar.MINUTE);
+        // time picker dialog
+        timerPicker = new TimePickerDialog(CustomersList.this,
+                new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker tp, int sHour, int sMinute) {
+
+                        if(sMinute > 30){
+                            minutess = "00";
+                            sHour +=1;
+                        }else{
+                            minutess = "30";
+                        }
+
+                        workingHours.setText(sHour + ":" + minutess);
+                    }
+                }, hour, Integer.parseInt(minutess), true);
+        timerPicker.show();
+
+    }
+
+    private void addWorkingHours() {
+
+        final Calendar calendar=Calendar.getInstance();
+
+        TimePickerDialog.OnTimeSetListener timeSetListener=new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                calendar.set(Calendar.HOUR_OF_DAY,hourOfDay);
+                calendar.set(Calendar.MINUTE,minute);
+
+//                if(minute > 30){
+//                    minutes = "00";
+//                    hourOfDay +=1;
+//                }else{
+//                    minutes = "30";
+//                }
+
+//                        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("MM-dd-yyyy, " + hourOfDay + ":" + minutes + ":" + "ss a");
+
+//                SimpleDateFormat simpleDateFormat= new SimpleDateFormat(hourOfDay + ":" + minutes);
+//                workingHours.setText(simpleDateFormat.format(calendar.getTime()));
+            }
+        };
+
+        new TimePickerDialog(CustomersList.this,timeSetListener,calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),false).show();
 
     }
 
@@ -194,7 +261,8 @@ public class CustomersList extends AppCompatActivity {
         workDate = todayDateTimePicker.getText().toString();
         customerName = customerNamesSpinner.getSelectedItem().toString();
         travel = radioButton.getText().toString();
-        workTime = workHourTxt.getEditText().getText().toString();
+        workTime = workingHours.getText().toString();
+//        workTime = workHourTxt.getEditText().getText().toString();
 
 
         if(TextUtils.isEmpty(customerJobDetail)){
@@ -266,8 +334,15 @@ public class CustomersList extends AppCompatActivity {
                         calendar.set(Calendar.HOUR_OF_DAY,hourOfDay);
                         calendar.set(Calendar.MINUTE,minute);
 
-                        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("MM-dd-yyyy, HH:mm:ss a");
+//                        if(minute > 30){
+//                            minutes = "00";
+//                            hourOfDay +=1;
+//                        }else{
+//                            minutes = "30";
+//                        }
 
+//                        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("MM-dd-yyyy, " + hourOfDay + ":" + minutes + ":" + "ss a");
+                        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("MM-dd-yyyy, HH:mmss a");
                         todayDateTimePicker.setText(simpleDateFormat.format(calendar.getTime()));
                     }
                 };
@@ -277,22 +352,6 @@ public class CustomersList extends AppCompatActivity {
         };
 
         new DatePickerDialog(CustomersList.this,dateSetListener,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
-
-//        final Calendar calendar=Calendar.getInstance();
-//        DatePickerDialog.OnDateSetListener dateSetListener=new DatePickerDialog.OnDateSetListener() {
-//            @Override
-//            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-//                calendar.set(Calendar.YEAR,year);
-//                calendar.set(Calendar.MONTH,month);
-//                calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth);
-//                SimpleDateFormat simpleDateFormat=new SimpleDateFormat("MMM-dd-yyyy");
-//                todayDateTimePicker.setText(simpleDateFormat.format(calendar.getTime()));
-//
-//            }
-//        };
-//
-//        new DatePickerDialog(CustomersList.this,dateSetListener,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
-
 
     }
 
