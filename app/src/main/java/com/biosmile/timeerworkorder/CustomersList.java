@@ -68,12 +68,12 @@ public class CustomersList extends AppCompatActivity {
     ArrayList<String> customerList = new ArrayList<>();
     TextView todayDateTimePicker, workingHours;
     String currentDate, currentTime, date_time, dateTimerFormat;
-    
+
     Button submitButton;
     ImageView backIcon;
     TextInputLayout customerJobDetailTxt, customerHardwareDetailTxt, workHourTxt;
     RadioGroup travelRadioBox;
-    RadioButton  radioButton;
+    RadioButton radioButton;
     String customerJobDetail, customerHardwareDetail, workDate, workTime, customerName, travel;
     ProgressDialog loadingDialog;
 
@@ -93,7 +93,7 @@ public class CustomersList extends AppCompatActivity {
         workingHours = findViewById(R.id.work_hour_txt);
         submitButton = findViewById(R.id.customer_detail_submit_btn);
         backIcon = findViewById(R.id.back_icon);
-        
+
         customerJobDetailTxt = findViewById(R.id.jobs_details_txt);
         customerHardwareDetailTxt = findViewById(R.id.hardware_list_txt);
         travelRadioBox = findViewById(R.id.radio_group);
@@ -124,15 +124,15 @@ public class CustomersList extends AppCompatActivity {
                 showDateTimeDialog(todayDateTimePicker);
             }
         });
-        
+
         workingHours.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                addWorkingHours();
-                
+
                 workTimer();
             }
-            
+
         });
 
         backIcon.setOnClickListener(new View.OnClickListener() {
@@ -141,7 +141,7 @@ public class CustomersList extends AppCompatActivity {
                 CustomersList.super.onBackPressed();
             }
         });
-        
+
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,10 +167,10 @@ public class CustomersList extends AppCompatActivity {
                     @Override
                     public void onTimeSet(TimePicker tp, int sHour, int sMinute) {
 
-                        if(sMinute > 30){
+                        if (sMinute > 30) {
                             minutess = "00";
-                            sHour +=1;
-                        }else{
+                            sHour += 1;
+                        } else {
                             minutess = "30";
                         }
 
@@ -183,13 +183,13 @@ public class CustomersList extends AppCompatActivity {
 
     private void addWorkingHours() {
 
-        final Calendar calendar=Calendar.getInstance();
+        final Calendar calendar = Calendar.getInstance();
 
-        TimePickerDialog.OnTimeSetListener timeSetListener=new TimePickerDialog.OnTimeSetListener() {
+        TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                calendar.set(Calendar.HOUR_OF_DAY,hourOfDay);
-                calendar.set(Calendar.MINUTE,minute);
+                calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                calendar.set(Calendar.MINUTE, minute);
 
 //                if(minute > 30){
 //                    minutes = "00";
@@ -205,7 +205,7 @@ public class CustomersList extends AppCompatActivity {
             }
         };
 
-        new TimePickerDialog(CustomersList.this,timeSetListener,calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),false).show();
+        new TimePickerDialog(CustomersList.this, timeSetListener, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show();
 
     }
 
@@ -254,8 +254,8 @@ public class CustomersList extends AppCompatActivity {
     private void validateFormData() {
 
         int selectedId = travelRadioBox.getCheckedRadioButtonId();
-        radioButton =  findViewById(selectedId);
-        
+        radioButton = findViewById(selectedId);
+
         customerJobDetail = customerJobDetailTxt.getEditText().getText().toString().trim();
         customerHardwareDetail = customerHardwareDetailTxt.getEditText().getText().toString();
         workDate = todayDateTimePicker.getText().toString();
@@ -265,17 +265,29 @@ public class CustomersList extends AppCompatActivity {
 //        workTime = workHourTxt.getEditText().getText().toString();
 
 
-        if(TextUtils.isEmpty(customerJobDetail)){
+        if (TextUtils.isEmpty(customerJobDetail)) {
             Toast.makeText(getApplicationContext(), "Job Details is Empty", Toast.LENGTH_SHORT).show();
-        }else if(TextUtils.isEmpty(customerHardwareDetail)){
+        } else if (TextUtils.isEmpty(customerHardwareDetail)) {
             Toast.makeText(getApplicationContext(), "Hardware Details is Empty", Toast.LENGTH_SHORT).show();
-        }else if(TextUtils.isEmpty(workTime)){
+        } else if (TextUtils.isEmpty(workTime)) {
             Toast.makeText(getApplicationContext(), "Work Time is Empty", Toast.LENGTH_SHORT).show();
-        } else{
+        } else {
 
             saveDataToDataBase(customerJobDetail, customerHardwareDetail, workDate, workTime, customerName, travel);
         }
-        
+
+    }
+
+    private void sendDataToMail(String customerName, String customerJobDetail, String customerHardwareDetail, String WorkDate, String workTime, String travel) {
+        String mEmail = "workorder@timeer.com";
+        String mSubject = customerName;
+        String mMessage = "Date : " + WorkDate + "\nCompany Name : " + customerName + "\nJob Detail : " + customerJobDetail + "\nHardware Detail : "
+                + customerHardwareDetail + "\nWorking Hours : " + workTime + "\nTravel : " + travel;
+
+
+        JavaMailAPI javaMailAPI = new JavaMailAPI(this, mEmail, mSubject, mMessage);
+
+        javaMailAPI.execute();
     }
 
     private void saveDataToDataBase(String customerJobDetail, String customerHardwareDetail, String workDate, String workTime, String customerName, String travel) {
@@ -301,38 +313,30 @@ public class CustomersList extends AppCompatActivity {
                 CustomersList.super.onBackPressed();
                 finish();
 
-//                HashMap<String, Object> workMapTwo = new HashMap<>();
-//                workMapTwo.put("customerWorkDateDetailTwo", workDate);
-//                rootRef.child("Work").child(workDate).child("WorkTime").updateChildren(workMapTwo).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        loadingDialog.dismiss();
-//                        CustomersList.super.onBackPressed();
-//                        finish();
-//                    }
-//                });
+                sendDataToMail(customerName, customerJobDetail, customerHardwareDetail, workDate, workTime, travel);
 
             }
         });
-
     }
+
+
 
 
     private void showDateTimeDialog(final TextView todayDateTimePicker) {
 
-        final Calendar calendar=Calendar.getInstance();
-        DatePickerDialog.OnDateSetListener dateSetListener=new DatePickerDialog.OnDateSetListener() {
+        final Calendar calendar = Calendar.getInstance();
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                calendar.set(Calendar.YEAR,year);
-                calendar.set(Calendar.MONTH,month);
-                calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-                TimePickerDialog.OnTimeSetListener timeSetListener=new TimePickerDialog.OnTimeSetListener() {
+                TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        calendar.set(Calendar.HOUR_OF_DAY,hourOfDay);
-                        calendar.set(Calendar.MINUTE,minute);
+                        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                        calendar.set(Calendar.MINUTE, minute);
 
 //                        if(minute > 30){
 //                            minutes = "00";
@@ -342,16 +346,16 @@ public class CustomersList extends AppCompatActivity {
 //                        }
 
 //                        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("MM-dd-yyyy, " + hourOfDay + ":" + minutes + ":" + "ss a");
-                        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("MM-dd-yyyy, HH:mmss a");
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd-yyyy, HH:mmss a");
                         todayDateTimePicker.setText(simpleDateFormat.format(calendar.getTime()));
                     }
                 };
 
-                new TimePickerDialog(CustomersList.this,timeSetListener,calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),false).show();
+                new TimePickerDialog(CustomersList.this, timeSetListener, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show();
             }
         };
 
-        new DatePickerDialog(CustomersList.this,dateSetListener,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
+        new DatePickerDialog(CustomersList.this, dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
 
     }
 
@@ -381,3 +385,4 @@ public class CustomersList extends AppCompatActivity {
         CustomersList.super.onBackPressed();
     }
 }
+
